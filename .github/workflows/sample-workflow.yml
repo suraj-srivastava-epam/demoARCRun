@@ -18,34 +18,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+
       - name: Download dependencies
-        shell: pwsh
         working-directory: sample-code
         run: |
-          Write-Host "Downloading Go dependencies..."
-          Write-Host "Command: go mod download"
-          Write-Host "Dependencies downloaded successfully."
+          echo "Downloading Go dependencies..."
+          echo "Command: go mod download"
+          echo "Dependencies downloaded successfully."
 
       - name: Run tests
-        shell: pwsh
         working-directory: sample-code
         run: |
-          Write-Host "Running Go tests..."
-          Write-Host "Command: go test ./... -v"
-          Write-Host "All tests passed successfully."
+          echo "Running Go tests..."
+          echo "Command: go test ./... -v"
+          echo "All tests passed successfully."
 
       - name: Build binary
-        shell: pwsh
         working-directory: sample-code
         run: |
-          Write-Host "Building Go application..."
-          Write-Host "Command: go build -v -o main main.go"
-          Write-Host "Go binary built successfully."
+          echo "Building Go application..."
+          echo "Command: go build -v -o main main.go"
+          echo "Go binary built successfully."
 
       - name: CI completed
-        shell: pwsh
         run: |
-          Write-Host "======================================"
-          Write-Host "Go CI Pipeline completed successfully"
-          Write-Host "Go Version: ${{ matrix.go }}"
-          Write-Host "======================================"
+          echo "======================================"
+          echo "Go CI Pipeline completed successfully"
+          echo "Go Version: ${{ matrix.go }}"
+          echo "======================================"
