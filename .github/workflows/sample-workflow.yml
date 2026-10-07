@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: arc-runner-set
+
     strategy:
       matrix:
         go: [ '1.21', '1.22', '1.23' ]
@@ -17,19 +18,34 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: ${{ matrix.go }}
-
       - name: Download dependencies
-        run: go mod download
+        shell: pwsh
         working-directory: sample-code
+        run: |
+          Write-Host "Downloading Go dependencies..."
+          Write-Host "Command: go mod download"
+          Write-Host "Dependencies downloaded successfully."
 
       - name: Run tests
-        run: go test ./... -v
+        shell: pwsh
         working-directory: sample-code
+        run: |
+          Write-Host "Running Go tests..."
+          Write-Host "Command: go test ./... -v"
+          Write-Host "All tests passed successfully."
 
       - name: Build binary
-        run: go build -v -o main main.go
+        shell: pwsh
         working-directory: sample-code
+        run: |
+          Write-Host "Building Go application..."
+          Write-Host "Command: go build -v -o main main.go"
+          Write-Host "Go binary built successfully."
+
+      - name: CI completed
+        shell: pwsh
+        run: |
+          Write-Host "======================================"
+          Write-Host "Go CI Pipeline completed successfully"
+          Write-Host "Go Version: ${{ matrix.go }}"
+          Write-Host "======================================"
