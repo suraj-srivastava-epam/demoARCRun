@@ -8,8 +8,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: demo_ephermeral_agent
-
+    runs-on: [self-hosted, demo_ephemeral_agent]
     strategy:
       matrix:
         go: [ '1.21', '1.22', '1.23' ]
