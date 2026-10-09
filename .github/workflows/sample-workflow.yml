@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: arc-runner-set
+    runs-on: demo_ephermeral_agent
 
     strategy:
       matrix:
